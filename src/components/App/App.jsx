@@ -14,6 +14,8 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
 import Profile from "../Profile/Profile.jsx";
+import { getItems } from "../../utils/api.js";
+import ConfirmPopup from "../ConfirmPopup/ConfirmPopup.jsx";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -31,6 +33,26 @@ function App() {
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
+  };
+
+  const [isConfirmDeleteOpen, setIsConfirmDeleteOpen] = useState(false); // to control confirm popup
+  const [itemToDelete, setItemToDelete] = useState(null); // store which item to delete
+
+  const handleDeleteClick = (item) => {
+    setItemToDelete(item);
+    setIsConfirmDeleteOpen(true); // open the confirm popup
+  };
+
+  const handleConfirmDelete = () => {
+    setClothingItems((items) =>
+      items.filter((item) => item._id !== itemToDelete._id)
+    );
+    setIsConfirmDeleteOpen(false);
+    closeActiveModal();
+  };
+
+  const handleCancelDelete = () => {
+    setIsConfirmDeleteOpen(false);
   };
 
   const handleCardClick = (card) => {
@@ -60,17 +82,17 @@ function App() {
         const filterData = filterWeatherData(data);
         setWeatherData(filterData);
       })
-      .catch((error) => {
-        console.error("Weather data error:", error);
-        // Set some default weather data to prevent crashes
-        setWeatherData({
-          type: "default",
-          temp: { F: 70, C: 21 },
-          city: "Loading...",
-          condition: "",
-          isDay: true,
-        });
-      });
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log(data);
+        // ToDo - set the clothing items to the data from the api
+        setClothingItems(data);
+      })
+      .catch(console.error);
   }, []);
 
   return (
@@ -85,6 +107,7 @@ function App() {
             <Route
               path="/"
               element={
+                //ToDo - pass clothing items as a prop to the Main component
                 <Main
                   weatherData={weatherData}
                   onCardClick={handleCardClick}
@@ -114,6 +137,12 @@ function App() {
           card={selectedCard}
           onClose={closeActiveModal}
           isOpen={activeModal === "preview"}
+          onDelete={handleDeleteClick}
+        />
+        <ConfirmPopup
+          isOpen={isConfirmDeleteOpen}
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
         />
         <Footer />
       </div>

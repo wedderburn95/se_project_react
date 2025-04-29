@@ -23,7 +23,14 @@
   cursor: pointer;
 }
 
-.header__user-container {
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: auto;
+}
+
+.header__profile {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -34,4 +41,9 @@
   width: 157;
   height: 25;
   top: 8px;
+}
+
+.header__profile-link {
+  text-decoration: none;
+  color: #000;
 }
