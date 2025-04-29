@@ -70,7 +70,7 @@ function App() {
 
   const handleAddItemSubmit = ({ name, imageUrl, weatherType }) => {
     setClothingItems([
-      { name, link: imageUrl, weather: weatherType },
+      { name, imageUrl, weather: weatherType },
       ...clothingItems,
     ]);
     closeActiveModal();

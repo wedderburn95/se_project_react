@@ -117,7 +117,8 @@
   gap: 8px;
   margin: 32px 0 0 0;
   border: none;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 1);
+
   font-family: Cabinet Grotesk;
   font-weight: 700;
   font-size: 16px;
@@ -128,7 +129,7 @@
 
 .modal__label_type_radio {
   font-family: Cabinet Grotesk;
-  font-weight: 700;
+  /* font-weight: 700; */
   font-size: 16px;
   line-height: 20px;
   letter-spacing: 0%;
@@ -137,4 +138,17 @@
 .modal_opened {
   visibility: visible;
   /* z-index: 1000; */
+}
+
+.modal__label_type_radio--selected {
+  font-weight: 700;
+}
+
+.modal__submit:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal__submit:disabled {
+  background: rgba(0, 0, 0, 0.3);
+  cursor: not-allowed;
 }

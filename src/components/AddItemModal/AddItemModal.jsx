@@ -85,7 +85,12 @@ export default function AddItemModal({
       </label>
       <fieldset className="modal__radio-button">
         <legend className="modal__legend">Select the weather type:</legend>
-        <label htmlFor="hot" className="modal__label modal__label_type_radio">
+        <label
+          htmlFor="hot"
+          className={`modal__label modal__label_type_radio ${
+            weatherType === "hot" ? "modal__label_type_radio--selected" : ""
+          }`}
+        >
           <input
             name="weathertype"
             id="choiceHot"
@@ -97,7 +102,13 @@ export default function AddItemModal({
           />
           Hot
         </label>
-        <label htmlFor="warm" className="modal__label modal__label_type_radio">
+
+        <label
+          htmlFor="warm"
+          className={`modal__label modal__label_type_radio ${
+            weatherType === "warm" ? "modal__label_type_radio--selected" : ""
+          }`}
+        >
           <input
             name="weathertype"
             id="choiceWarm"
@@ -110,7 +121,13 @@ export default function AddItemModal({
           />
           Warm
         </label>
-        <label htmlFor="cold" className="modal__label modal__label_type_radio">
+
+        <label
+          htmlFor="cold"
+          className={`modal__label modal__label_type_radio ${
+            weatherType === "cold" ? "modal__label_type_radio--selected" : ""
+          }`}
+        >
           <input
             name="weathertype"
             id="choiceCold"
