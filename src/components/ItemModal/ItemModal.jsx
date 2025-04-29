@@ -2,7 +2,7 @@ import "./ItemModal.css";
 import ModalWithForm from "../../components/ModalWithForm/ModalWithForm.jsx";
 import { useState } from "react";
 
-function ItemModal({ activeModal, onClose, isOpen, card }) {
+function ItemModal({ activeModal, onClose, isOpen, card, onDelete }) {
   // console.log(card);
   const [name, setName] = useState("");
   const [isValid, setIsValid] = useState(false);
