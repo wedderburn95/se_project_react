@@ -39,10 +39,15 @@ export default function AddItemModal({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onHandleAddItemSubmit({ name, imageUrl, weatherType });
-    setName("");
-    setImageUrl("");
-    setWeatherType("");
+    onHandleAddItemSubmit({ name, imageUrl, weatherType })
+      .then(() => {
+        setName("");
+        setImageUrl("");
+        setWeatherType("");
+      })
+      .catch((error) => {
+        console.error("Error adding item:", error);
+      });
   };
 
   return (

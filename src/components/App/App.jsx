@@ -14,8 +14,9 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
 import Profile from "../Profile/Profile.jsx";
-import { getItems } from "../../utils/api.js";
+import { addNewClothingItem, getItems } from "../../utils/api.js";
 import ConfirmPopup from "../ConfirmPopup/ConfirmPopup.jsx";
+import { deleteItem } from "../../utils/api.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -44,11 +45,15 @@ function App() {
   };
 
   const handleConfirmDelete = () => {
-    setClothingItems((items) =>
-      items.filter((item) => item._id !== itemToDelete._id)
-    );
-    setIsConfirmDeleteOpen(false);
-    closeActiveModal();
+    deleteItem(itemToDelete._id)
+      .then(() => {
+        setClothingItems((items) =>
+          items.filter((item) => item._id !== itemToDelete._id)
+        );
+        setIsConfirmDeleteOpen(false);
+        closeActiveModal();
+      })
+      .catch((err) => console.error("Delete failed:", err));
   };
 
   const handleCancelDelete = () => {
@@ -69,11 +74,17 @@ function App() {
   };
 
   const handleAddItemSubmit = ({ name, imageUrl, weatherType }) => {
-    setClothingItems([
-      { name, imageUrl, weather: weatherType },
-      ...clothingItems,
-    ]);
-    closeActiveModal();
+    //add the the new item to the server
+    return addNewClothingItem(name, imageUrl, weatherType)
+      .then((newItem) => {
+        // adds the new item locally/visually to the dom
+        setClothingItems([newItem, ...clothingItems]);
+        // closing the modal
+        closeActiveModal();
+      })
+      .catch((error) => {
+        console.error("Failed to add Item", error);
+      });
   };
 
   useEffect(() => {
@@ -121,6 +132,7 @@ function App() {
                 <Profile
                   clothingItems={clothingItems}
                   onCardClick={handleCardClick}
+                  handleAddClick={handleAddClick}
                 />
               }
             />

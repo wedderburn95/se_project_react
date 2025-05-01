@@ -53,3 +53,11 @@
   margin: 10px;
   cursor: pointer;
 }
+
+.clothes-section__items-btn {
+  width: 116px;
+  height: 24px;
+  top: 8px;
+  border: none;
+  cursor: pointer;
+}
