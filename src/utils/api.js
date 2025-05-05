@@ -1,10 +1,15 @@
 const baseUrl = "http://localhost:3001";
 
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Error: ${res.status}`);
+}
+
 export async function getItems() {
   const response = await fetch(`${baseUrl}/items`);
-  return await (response.ok
-    ? response.json()
-    : Promise.reject(`Error: ${response.status}`));
+  return checkResponse(response);
 }
 
 export function addNewClothingItem(name, imageUrl, weather) {
@@ -18,12 +23,7 @@ export function addNewClothingItem(name, imageUrl, weather) {
       imageUrl,
       weather,
     }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Error: ${res.status}`);
-  });
+  }).then(checkResponse);
 }
 
 export async function deleteItem(itemId) {
@@ -33,10 +33,7 @@ export async function deleteItem(itemId) {
       "Content-Type": "application/json",
     },
   });
-  if (!res.ok) {
-    return Promise.reject(`Error: ${res.status}`);
-  }
-  return await res.json();
+  return checkResponse(res);
 }
 
 // 2 ways to deal with asynchronous code:
