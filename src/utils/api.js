@@ -12,30 +12,64 @@ export async function getItems() {
   return checkResponse(response);
 }
 
-export function addNewClothingItem(name, imageUrl, weather) {
+export function addNewClothingItem({ name, imageUrl, weatherType }) {
+  console.log("API received:", { name, imageUrl, weatherType });
+  const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       name,
       imageUrl,
-      weather,
+      weather: weatherType,
     }),
   }).then(checkResponse);
 }
 
 export async function deleteItem(itemId) {
+  const token = localStorage.getItem("jwt");
   const res = await fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   });
   return checkResponse(res);
 }
 
-// 2 ways to deal with asynchronous code:
-// 1. Promises - .then() and .catch() methods
-// 2. Async/Await - async function and await keyword
+export const updateUserInfo = ({ name, avatar }) => {
+  const token = localStorage.getItem("jwt");
+
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, avatar }),
+  }).then(checkResponse);
+};
+
+export function addCardLike(cardId, token) {
+  return fetch(`${baseUrl}/items/${cardId}/likes`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  }).then(checkResponse);
+}
+
+export function removeCardLike(cardId, token) {
+  return fetch(`${baseUrl}/items/${cardId}/likes`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  }).then(checkResponse);
+}

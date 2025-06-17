@@ -3,11 +3,17 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import { useContext } from "react";
-// import { defaultClothingItems } from "../../utils/constants.js";
+import {
+  weatherOptions,
+  defaultWeatherOptions,
+} from "../../utils/constants.js";
 
-function Main({ weatherData, onCardClick, clothingItems }) {
+function Main({ weatherData, onCardClick, clothingItems, onCardLike }) {
   // console.log(weatherData);
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+  const currentWeatherOption =
+    weatherOptions.find((option) => option.day === weatherData.type) ||
+    defaultWeatherOptions;
 
   return (
     <main>
@@ -28,6 +34,7 @@ function Main({ weatherData, onCardClick, clothingItems }) {
                   key={item._id}
                   item={item}
                   onCardClick={onCardClick}
+                  onCardLike={onCardLike}
                 />
               );
             })}

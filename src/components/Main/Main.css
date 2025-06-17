@@ -11,3 +11,19 @@
   gap: 21px;
   border-radius: 24px;
 }
+
+.weather {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.weather__icon {
+  width: 50px;
+  height: 50px;
+}
+
+.weather__description {
+  font-size: 1.2rem;
+}

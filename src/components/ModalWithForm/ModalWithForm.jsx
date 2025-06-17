@@ -5,10 +5,11 @@ function ModalWithForm({
   titleText,
   isOpen,
   onClose,
-  buttonText = "Add garment",
+  buttonText = "Log In",
   onSubmit,
-
-  isValid = false,
+  isValid = true,
+  registerOptionText,
+  onAltOptionClick,
 }) {
   return (
     <div className={`modal ${isOpen ? " modal_opened" : ""}`}>
@@ -21,9 +22,23 @@ function ModalWithForm({
         </div>
         <form onSubmit={onSubmit} className="modal__form">
           {children}
-          <button type="submit" className="modal__submit" disabled={!isValid}>
-            {buttonText}
-          </button>
+          <div className="modal__button-group">
+            <button type="submit" className="modal__submit" disabled={!isValid}>
+              {buttonText}
+            </button>
+            {registerOptionText && (
+              <p className="modal__alt-option">
+                or{" "}
+                <button
+                  type="button"
+                  className="modal__alt-link"
+                  onClick={onAltOptionClick}
+                >
+                  {registerOptionText}
+                </button>
+              </p>
+            )}
+          </div>
         </form>
       </div>
     </div>

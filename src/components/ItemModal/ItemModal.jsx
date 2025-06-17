@@ -1,6 +1,8 @@
 import "./ItemModal.css";
 import ModalWithForm from "../../components/ModalWithForm/ModalWithForm.jsx";
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
 function ItemModal({ activeModal, onClose, isOpen, card, onDelete }) {
   // console.log(card);
@@ -14,6 +16,8 @@ function ItemModal({ activeModal, onClose, isOpen, card, onDelete }) {
   };
 
   const [submittedGarment, setSubmittedGarment] = useState(null);
+  const currentUser = useContext(CurrentUserContext);
+  const isOwn = card.owner === currentUser._id;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,9 +51,11 @@ function ItemModal({ activeModal, onClose, isOpen, card, onDelete }) {
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
         </div>
-        <button className="item-modal__delete" onClick={() => onDelete(card)}>
-          Delete item
-        </button>
+        {isOwn && (
+          <button className="item-modal__delete" onClick={() => onDelete(card)}>
+            Delete item
+          </button>
+        )}
       </div>
     </div>
   );
