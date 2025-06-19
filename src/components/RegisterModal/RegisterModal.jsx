@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 import "./RegisterModal.css";
@@ -23,6 +23,8 @@ const RegisterModal = ({ isOpen, onClose, onRegister, onAltOptionClick }) => {
       setForm({
         name: "",
         avatar: "",
+        email: "",
+        password: "",
       });
     }
   }, [isOpen]);
