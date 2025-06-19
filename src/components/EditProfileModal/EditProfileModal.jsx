@@ -13,6 +13,7 @@ const EditProfileModal = ({ isOpen, onClose, onChange }) => {
   });
 
   useEffect(() => {
+    console.log("currentUser on open:", currentUser);
     if (isOpen && currentUser) {
       setForm({
         name: currentUser.name || "",
@@ -36,7 +37,7 @@ const EditProfileModal = ({ isOpen, onClose, onChange }) => {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonText="Edit user"
+      buttonText="Edit User"
     >
       <input
         name="name"

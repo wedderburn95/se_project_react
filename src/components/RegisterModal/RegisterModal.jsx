@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 import "./RegisterModal.css";
@@ -17,6 +17,16 @@ const RegisterModal = ({ isOpen, onClose, onRegister, onAltOptionClick }) => {
     e.preventDefault();
     onRegister(form);
   };
+
+  useEffect(() => {
+    if (!isOpen) {
+      setForm({
+        name: "",
+        avatar: "",
+      });
+    }
+  }, [isOpen]);
+
   return (
     <ModalWithForm
       titleText="Sign up"
@@ -24,8 +34,8 @@ const RegisterModal = ({ isOpen, onClose, onRegister, onAltOptionClick }) => {
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText="Sign up"
-      // onAltOptionClick={onAltOptionClick}
-      // registerOptionText="Register"
+      onAltOptionClick={onAltOptionClick}
+      registerOptionText="Login"
     >
       <input
         name="name"
@@ -58,6 +68,16 @@ const RegisterModal = ({ isOpen, onClose, onRegister, onAltOptionClick }) => {
         required
         placeholder="Password"
       />
+      {/* <div className="modal__alt-option">
+        Or{" "}
+        <button
+          type="button"
+          className="modal__alt-option-button"
+          onClick={onAltOptionClick}
+        >
+          Log In
+        </button>
+      </div> */}
     </ModalWithForm>
   );
 };

@@ -134,6 +134,7 @@ function App() {
 
   const closeActiveModal = () => {
     setActiveModal("");
+    // setForm({});
   };
 
   const handleAddItemSubmit = ({ name, imageUrl, weatherType }) => {
@@ -271,6 +272,7 @@ function App() {
             isOpen={activeModal === "register"}
             onClose={closeActiveModal}
             onRegister={handleRegister}
+            onAltOptionClick={() => setActiveModal("login")}
           />
 
           <LoginModal
@@ -280,6 +282,7 @@ function App() {
             onAltOptionClick={() => setActiveModal("register")}
           />
           <EditProfileModal
+            key={`${currentUser._id || "guest"}-${activeModal}`}
             isOpen={activeModal === "edit-profile"}
             onClose={closeActiveModal}
             onChange={handleChange}

@@ -1,6 +1,6 @@
 import "./AddItemModal.css";
 import ModalWithForm from "../../components/ModalWithForm/ModalWithForm.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function AddItemModal({
   onClose,
@@ -11,6 +11,15 @@ export default function AddItemModal({
   const [imageUrl, setImageUrl] = useState("");
   const [weatherType, setWeatherType] = useState("");
   const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    if (!open) {
+      setName("");
+      setImageUrl("");
+      setWeatherType("");
+      setIsValid(false);
+    }
+  }, [isOpen]);
 
   const handleNameChange = (e) => {
     const newName = e.target.value;
@@ -49,6 +58,16 @@ export default function AddItemModal({
         console.error("Error adding item:", error);
       });
   };
+
+  // Reset form when modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      setName("");
+      setImageUrl("");
+      setWeatherType("");
+      setIsValid(false);
+    }
+  }, [isOpen]);
 
   return (
     <ModalWithForm

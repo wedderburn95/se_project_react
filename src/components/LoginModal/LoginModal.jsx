@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./LoginModal.css";
 
@@ -13,6 +13,12 @@ const LoginModal = ({ isOpen, onClose, onLogin, onAltOptionClick }) => {
     e.preventDefault();
     onLogin(form);
   };
+
+  useEffect(() => {
+    if (!isOpen) {
+      setForm({ email: "", password: "" }); // Reset form when modal closes
+    }
+  }, [isOpen]);
 
   return (
     <ModalWithForm
