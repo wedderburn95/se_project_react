@@ -21,7 +21,7 @@ function SideBar({ handleSignOut, onEditProfile }) {
       >
         Change profile data
       </p>
-      {/* <p className="sidebar__logout">Log out</p> */}
+
       <button className="header__signout-button" onClick={handleSignOut}>
         Sign Out
       </button>

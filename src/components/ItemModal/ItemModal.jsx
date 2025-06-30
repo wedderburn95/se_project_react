@@ -5,7 +5,6 @@ import { useState, useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
 function ItemModal({ activeModal, onClose, isOpen, card, onDelete }) {
-  // console.log(card);
   const [name, setName] = useState("");
   const [isValid, setIsValid] = useState(false);
 
@@ -21,7 +20,7 @@ function ItemModal({ activeModal, onClose, isOpen, card, onDelete }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("Submitted garment:");
+
     if (isValid) {
       const newGarment = {
         name: name,

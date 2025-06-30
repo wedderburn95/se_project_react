@@ -48,10 +48,8 @@ function App() {
   });
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
-  console.log(activeModal);
-  const [selectedCard, setSelectedCard] = useState({});
 
-  console.log("activeModal is:", activeModal);
+  const [selectedCard, setSelectedCard] = useState({});
 
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
@@ -177,7 +175,6 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        console.log(data);
         // ToDo - set the clothing items to the data from the api
         setClothingItems(data);
       })

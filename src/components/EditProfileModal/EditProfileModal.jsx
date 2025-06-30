@@ -13,7 +13,6 @@ const EditProfileModal = ({ isOpen, onClose, onChange }) => {
   });
 
   useEffect(() => {
-    console.log("currentUser on open:", currentUser);
     if (isOpen && currentUser) {
       setForm({
         name: currentUser.name || "",

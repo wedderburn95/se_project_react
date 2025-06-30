@@ -9,7 +9,6 @@ import {
 } from "../../utils/constants.js";
 
 function Main({ weatherData, onCardClick, clothingItems, onCardLike }) {
-  // console.log(weatherData);
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const currentWeatherOption =
     weatherOptions.find((option) => option.day === weatherData.type) ||

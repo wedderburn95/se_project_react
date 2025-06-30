@@ -36,6 +36,3 @@ export default function ToggleSwitch() {
     </label>
   );
 }
-
-// transform: translateX(0);
-// mix-blend-mode: difference;

@@ -8,12 +8,21 @@ export function checkResponse(res) {
 }
 
 export async function getItems() {
-  const response = await fetch(`${baseUrl}/items`);
+  const token = localStorage.getItem("jwt");
+
+  const headers = { "Content-Type": "application/json" };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const response = await fetch(`${baseUrl}/items`, {
+    headers,
+  });
   return checkResponse(response);
 }
 
 export function addNewClothingItem({ name, imageUrl, weatherType }) {
-  console.log("API received:", { name, imageUrl, weatherType });
+  // console.log("API received:", { name, imageUrl, weatherType });
   const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/items`, {
     method: "POST",
