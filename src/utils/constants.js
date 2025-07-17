@@ -109,6 +109,9 @@ export const defaultClothingItems = [
   },
 ];
 
+export const BASE_URL =
+  import.meta.env.VITE_BASE_URL || "http://localhost:3001";
+
 export const coordinates = {
   latitude: 25.578701,
   longitude: -80.396288,

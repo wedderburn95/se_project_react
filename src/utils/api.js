@@ -1,4 +1,7 @@
-const baseUrl = "http://localhost:3001";
+import { BASE_URL } from "../utils/constants.js";
+
+//const BASE_URL = "http://rnr.pakasak.com"; //prod base URL
+// const BASE_URL = "http://localhost:3001"; //dev base URL
 
 export function checkResponse(res) {
   if (res.ok) {
@@ -15,7 +18,7 @@ export async function getItems() {
     headers.Authorization = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${baseUrl}/items`, {
+  const response = await fetch(`${BASE_URL}/items`, {
     headers,
   });
   return checkResponse(response);
@@ -24,7 +27,7 @@ export async function getItems() {
 export function addNewClothingItem({ name, imageUrl, weatherType }) {
   // console.log("API received:", { name, imageUrl, weatherType });
   const token = localStorage.getItem("jwt");
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`${BASE_URL}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +43,7 @@ export function addNewClothingItem({ name, imageUrl, weatherType }) {
 
 export async function deleteItem(itemId) {
   const token = localStorage.getItem("jwt");
-  const res = await fetch(`${baseUrl}/items/${itemId}`, {
+  const res = await fetch(`${BASE_URL}/items/${itemId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -53,7 +56,7 @@ export async function deleteItem(itemId) {
 export const updateUserInfo = ({ name, avatar }) => {
   const token = localStorage.getItem("jwt");
 
-  return fetch(`${baseUrl}/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -64,7 +67,7 @@ export const updateUserInfo = ({ name, avatar }) => {
 };
 
 export function addCardLike(cardId, token) {
-  return fetch(`${baseUrl}/items/${cardId}/likes`, {
+  return fetch(`${BASE_URL}/items/${cardId}/likes`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -74,7 +77,7 @@ export function addCardLike(cardId, token) {
 }
 
 export function removeCardLike(cardId, token) {
-  return fetch(`${baseUrl}/items/${cardId}/likes`, {
+  return fetch(`${BASE_URL}/items/${cardId}/likes`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,

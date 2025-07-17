@@ -1,4 +1,7 @@
-const BASE_URL = "http://localhost:3001";
+import { BASE_URL } from "../utils/constants.js";
+
+//const BASE_URL = "http://35.231.77.146"; //prod base URL
+// const BASE_URL = "http://localhost:3001"; //dev base URL
 
 import { checkResponse } from "./api.js";
 

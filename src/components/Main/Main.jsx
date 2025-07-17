@@ -34,6 +34,7 @@ function Main({ weatherData, onCardClick, clothingItems, onCardLike }) {
                   item={item}
                   onCardClick={onCardClick}
                   onCardLike={onCardLike}
+                  onDelete={handleDeleteClick}
                 />
               );
             })}

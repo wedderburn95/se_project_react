@@ -16,7 +16,7 @@ function ItemModal({ activeModal, onClose, isOpen, card, onDelete }) {
 
   const [submittedGarment, setSubmittedGarment] = useState(null);
   const currentUser = useContext(CurrentUserContext);
-  const isOwn = card.owner === currentUser._id;
+  const isOwn = card.owner?.toString() === currentUser?._id.toString();
 
   const handleSubmit = (e) => {
     e.preventDefault();
