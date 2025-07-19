@@ -8,7 +8,13 @@ import {
   defaultWeatherOptions,
 } from "../../utils/constants.js";
 
-function Main({ weatherData, onCardClick, clothingItems, onCardLike }) {
+function Main({
+  weatherData,
+  onCardClick,
+  clothingItems,
+  onCardLike,
+  onCardDelete,
+}) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const currentWeatherOption =
     weatherOptions.find((option) => option.day === weatherData.type) ||
@@ -35,6 +41,7 @@ function Main({ weatherData, onCardClick, clothingItems, onCardLike }) {
                   onCardClick={onCardClick}
                   onCardLike={onCardLike}
                   onDelete={handleDeleteClick}
+                  onCardDelete={onCardDelete}
                 />
               );
             })}
