@@ -40,7 +40,6 @@ function Main({
                   item={item}
                   onCardClick={onCardClick}
                   onCardLike={onCardLike}
-                  onDelete={handleDeleteClick}
                   onCardDelete={onCardDelete}
                 />
               );
